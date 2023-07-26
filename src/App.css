@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+body{
+font-family: 'Black Han Sans', sans-serif;
+background-color: #4a4a4a;
+}
+
+#box{
+  width: 500px;
+  margin: 0 auto;
+  border: 2px solid #666;
+  padding: 25px;
+  box-sizing: border-box; 
+  border-radius: 30px;
+  background-color: #bfbfbf;
+}
+#box>dl{
+  text-align: center;
+}
+#box>dl>dt{
+  padding: 20px;
+  font-size: 40px;
+}
+#box>dl>dd{
+  font-size: 20px;
+}
+#box>dl>dd:last-child{
+  color: #f32525;
+  padding-top: 10px;
+}
+#box>button{
+  width: 100px;
+  padding: 10px;
+  color: salmon;
+  margin: 30px 170px;
+  font-size: 18px;
+  border: 2px solid salmon;
+  background-color: rgb(255, 220, 216);
+}
+#btn{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+#btn>button{
+  padding: 10px 30px;
+  border: none;
+  color: #fff;
+  margin: 0 25px;
+  border: 2px solid #666;
+  border-radius: 30px;
+  font-size: 30px;
+}
+#btn>button:first-child{
+  border: 2px solid salmon;
+  background-color: rgb(255, 220, 216);
+}
+#btn>button:last-child{
+  border: 2px solid greenyellow;
+  background-color: rgb(242, 255, 222);
+}
+#container{
+  display: flex;
+  justify-content: space-evenly;
+  border: 2px solid #666;
+  padding: 20px 0;
+}
+#contain{
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px 0;
+}
+#contain>img{
+  width: 100px;
+}
+#bet>input{
+  width: 100px;
+  height: 30px;
+  margin: 30px 170px;
+  border-radius: 30px;
+  border: 2px solid greenyellow;
+  background-color: rgb(242, 255, 222);
+  text-align: center;
+}
+
