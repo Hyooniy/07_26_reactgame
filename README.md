@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# React 가위바위보 게임
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 소개
 
-## Available Scripts
+리액트를 이용하여 만든 가위바위보 게임입니다.   
+먼저 점수 15점을 획득하는 사람이 이기는 게임입니다.
 
-In the project directory, you can run:
+## 배포링크
 
-### `npm start`
+배포방식은 AWS S3의 간이 배포를 이용하였습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 개발 도구 및 환경
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. 개발환경 : VSCode,npm
+2. 개발도구 : react,css,html
 
-### `npm test`
+## 프로젝트 설명
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 프로젝트 계획서
 
-### `npm run build`
+### 헤더부분
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+게임 설명부분을 넣어주었다 App.js에 컴포넌트를 만들어주고 관련 css를 작성해 넣어주었다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Reset버튼
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+먼저 따로 Button.js라는 컴포넌트를 만들어주고 App.js에 import 했다.
+reset 함수를 새로 만들어 reset에 필요한 코드들을 작성해주고 Onclick를 이용해 reset을 넣어주었다
+버튼을 누르면 전체 게임이 리셋이 된다
 
-### `npm run eject`
+### 점수판 (container부분)
+나의 점수와 컴퓨터가 랜덤으로 나오는 점수를 만들기 위해  
+state를 활용했다. 먼저 나의 점수 score 를 state, 그리고 상대방 점수도 state 해준다
+그리고 컴포넌트 부분에 넣어준다
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 이미지와 버튼
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+가위바위보 패를 고르고 그 패가 화면이 뜨게 하는 기능을 만드려면
+Border 컴포넌트를 생성하고 그 안에 이미지 파일을 import 해준다.
+그리고 변수 RSP를 만들어 각각 이름과 이미지를 넣어준다
+Border 컴포넌트 안에는 value값을 props 시키고
+다시 또 변수 rsp를 만들어 RSP[value]를 넣어준다
+내보내기 위해서 <img> 안에 이미지와 value값을 넣어준다.
+App.js로 돌아와서 import 시킨 Border를 2개 생성하고 value값을 먼저 state 시켜둔 hand의 값과 otherhand를 넣어준다
+그 이미지가 바뀌게 하려면 먼저 버튼이 필요하다. HandButton이라는 컴포넌트를 생성시켜주고 화살표 함수를 넣어 
+onClick 함수를 value값으로 실행시킨다. 이 때, onClick 함수는 상위 컴포넌트인 App에서 prop(nextHand)으로 내려준 ButtonClick 함수이다. Button 클릭이 실행 되는것! 그리고 각각에 맞는 이모지를 넣어주었다
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### 배점 선택
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+원하는 숫자로 배점을 정하면 게임이 진행 될때마다 승리하는 쪽이 점수를 얻을 수 있다.
+handleBetChange 함수를 만들어서 input value의 속성을 참조 할 수 있는 e.target.value 를 가저온다
+또한 문자열이기 때문에 숫자로 변환해줬다.
+null 값을 방지하기 위해서 input 태그 안에 1과 6사이의 숫자를 만들어주기 위한 코드를 작성해준다
+Math.floor를 사용하여 num을 반환해준다 
+다시 컴포넌트에 type,value,최대숫자와 최소숫자를 넣어주고 onChange prop를 이용하여 값이 변경 될 때마다 이벤트를 반환한다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 승부기록
 
-### Code Splitting
+먼저 게임 기록을 만들기 위해서 gameHistory를 state해준다.
+HandButton을 클릭하면 그 결과 값이 표시가 되는데 ButtonCclick 함수에서 처리 해주었다
+Array의 내장매서드인 join을 활용하여 문자열로 반환 시켜준다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### modal 창
 
-### Analyzing the Bundle Size
+내가 이겼는지 졌는지 확인할 수 있는 창이다.
+Modal 컴포넌트를 생성해준다.
+App.js에 modal state를 해주어 기본값을 false로 지정해두어 초기에는 모달창이 뜨지 않도록 한다
+그리고 삼항 연산자를 이용하여 조건을 넣어 내가 이기면 '이겼습니다' 가 뜨게 하고 otherscore가 크면 '졌습니다'가 뜨게한다
+이 텍스트는 props를 이용해서 만들었다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## 자기평가
+1. 아직 리액트에 대한 이해가 부족하여 더 좋은 게임을 만들지 못해서 아쉬웠다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
